@@ -6,7 +6,8 @@ CREATE TABLE `players` (
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO `players` (`id`, `player_and_games`) VALUES (1, '{  
+INSERT INTO `players` (`id`, `player_and_games`) VALUES (1, '{
+    "id": 1,  
     "name": "Sally",  
     "games_played":{    
        "Battlefield": "yes",                                                                                                                          
@@ -18,7 +19,8 @@ INSERT INTO `players` (`id`, `player_and_games`) VALUES (1, '{
    }'
 );
 
-INSERT INTO `players` (`id`, `player_and_games`) VALUES (2, '{  
+INSERT INTO `players` (`id`, `player_and_games`) VALUES (2, '{
+    "id": 2,  
     "name": "Thom",  
     "games_played":{    
        "Battlefield": "yes",                                                                                                                          
@@ -30,7 +32,8 @@ INSERT INTO `players` (`id`, `player_and_games`) VALUES (2, '{
    }'
 );
 
-INSERT INTO `players` (`id`, `player_and_games`) VALUES (3, '{  
+INSERT INTO `players` (`id`, `player_and_games`) VALUES (3, '{
+    "id": 3,  
     "name": "Ali",  
     "games_played":{    
        "Battlefield": "no",                                                                                                                          
@@ -39,7 +42,8 @@ INSERT INTO `players` (`id`, `player_and_games`) VALUES (3, '{
    }'
 );
 
-INSERT INTO `players` (`id`, `player_and_games`) VALUES (4, '{  
+INSERT INTO `players` (`id`, `player_and_games`) VALUES (4, '{
+    "id": 4,  
     "name": "Alfred",  
     "games_played":{    
        "Battlefield": "no",                                                                                                                          
@@ -51,20 +55,21 @@ INSERT INTO `players` (`id`, `player_and_games`) VALUES (4, '{
    }'
 );
 
-INSERT INTO `players` (`id`, `player_and_games`) VALUES (5, '{  
+INSERT INTO `players` (`id`, `player_and_games`) VALUES (5, '{
+    "id": 5,  
     "name": "Phil",  
     "games_played":{    
        "Battlefield": "yes",                                                                                                                          
        "Crazy Tennis": "yes",  
-       "Puzzler": {                                                                                                                                                                                                                                                                                                                                                                                               
+       "Puzzler": {
           "time": 7
         }
       }
    }'
 );
 
-
-INSERT INTO `players` (`id`, `player_and_games`) VALUES (6, '{  
+INSERT INTO `players` (`id`, `player_and_games`) VALUES (6, '{
+    "id": 6,  
     "name": "Henry",  
     "games_played":{    
        "Battlefield": "yes",                                                                                                                          
@@ -85,7 +90,7 @@ CREATE TABLE `players_two` (
     `player_and_games` JSON,
     `id` INT GENERATED ALWAYS AS (`player_and_games` ->> '$.id') STORED,
     `times_virtual` INT GENERATED ALWAYS AS (`player_and_games` ->> '$.games_played.Puzzler.time'),
-    `names_virtual` VARCHAR(11)  GENERATED ALWAYS AS (`player_and_games` ->> '$.name'),
+    `names_virtual` VARCHAR(11) GENERATED ALWAYS AS (`player_and_games` ->> '$.name'),
     PRIMARY KEY (`id`),
     INDEX `times_index` (`times_virtual`),
     INDEX `names_index` (`names_virtual`)
@@ -146,7 +151,7 @@ INSERT INTO `players_two` (`player_and_games`) VALUES ('{
     "games_played":{    
        "Battlefield": "yes",                                                                                                                          
        "Crazy Tennis": "yes",  
-       "Puzzler": {                                                                                                                                                                                                                                                                                                                                                                                               
+       "Puzzler": {
           "time": 7
         }
       }
