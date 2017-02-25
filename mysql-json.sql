@@ -9,7 +9,7 @@ CREATE TABLE `players` (
 
 INSERT INTO `players` (`id`, `player_and_games`) VALUES (1, '{
     "id": 1,  
-    "name": "Sally",  
+    "name": "Sally",
     "games_played":{    
        "Battlefield": {
           "weapon": "sniper rifle",
@@ -133,6 +133,7 @@ ALTER TABLE `players` ADD COLUMN `tennis_lost_virtual` INT GENERATED ALWAYS AS (
 ALTER TABLE `players` ADD COLUMN `battlefield_level_virtual` INT GENERATED ALWAYS AS (`player_and_games` ->> '$.games_played.Battlefield.level') NOT NULL AFTER `tennis_lost_virtual`;
 
 CREATE INDEX `times_idx` ON `players`(`times_virtual`);
+CREATE INDEX `names_idx` ON `players`(`names_virtual`);
 CREATE INDEX `won_idx` ON `players`(`tennis_won_virtual`);
 CREATE INDEX `lost_idx` ON `players`(`tennis_lost_virtual`);
 CREATE INDEX `level_idx` ON `players`(`battlefield_level_virtual`);
