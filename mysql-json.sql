@@ -142,14 +142,13 @@ CREATE INDEX `level_idx` ON `players`(`battlefield_level_virtual`);
 
 
 CREATE TABLE `players_two` (
-    `id` INT GENERATED ALWAYS AS (`player_and_games` ->> '$.id') STORED NOT NULL,
+    `id` INT GENERATED ALWAYS AS (`player_and_games` ->> '$.id') UNIQUE NOT NULL,
     `player_and_games` JSON NOT NULL,
     `names_virtual` VARCHAR(20) GENERATED ALWAYS AS (`player_and_games` ->> '$.name') NOT NULL,
     `times_virtual` INT GENERATED ALWAYS AS (`player_and_games` ->> '$.games_played.Puzzler.time') NOT NULL,
     `tennis_won_virtual` INT GENERATED ALWAYS AS (`player_and_games` ->> '$.games_played."Crazy Tennis".won') NOT NULL,
     `tennis_lost_virtual` INT GENERATED ALWAYS AS (`player_and_games` ->> '$.games_played."Crazy Tennis".lost') NOT NULL,
     `battlefield_level_virtual` INT GENERATED ALWAYS AS (`player_and_games` ->> '$.games_played.Battlefield.level') NOT NULL, 
-    PRIMARY KEY (`id`),
     INDEX `times_index` (`times_virtual`),
     INDEX `names_index` (`names_virtual`),
     INDEX `won_index` (`tennis_won_virtual`),
